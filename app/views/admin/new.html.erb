@@ -1,0 +1,45 @@
+<div class="col-lg-offset-2">
+        <%= form_for @user, url: { controller: :admin, action: :create},html: {class: "form-horizontal"} do |f| %>
+          <div class="form-group">
+          <%= f.label :email, "Username", class: "col-md-2 control-label" %>
+          <div class="col-md-6">
+            <%= f.text_field :email, class: "form-control", placeholder: "Enter user name" %>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.label :password, "Password", class: "col-md-2 control-label" %>
+          <div class="col-md-6">  
+            <%= f.password_field :password, class: "form-control", placeholder: "Enter password" %>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.label :password_confirm, "Password-confirm", class: "col-md-2 control-label" %>
+          <div class="col-md-6">  
+            <%= f.password_field :password_confirm, class: "form-control", placeholder: "Enter password" %>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.label :name, "Name", class: "col-md-2 control-label" %>
+          <div class="col-md-6">
+            <%= f.text_field :name, class: "form-control", placeholder: "Enter Name" %>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.label :nickname, "Nickname", class: "col-md-2 control-label" %>
+          <div class="col-md-6">
+            <%= f.text_field :nickname, class: "form-control", placeholder: "Enter Nickname" %>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.label :nickname, "Nickname", class: "col-md-2 control-label" %>
+          <div class="col-md-6">
+            <%= f.date_field :nickname, class: "form-control", placeholder: "Enter Nickname" %>
+          </div>
+        </div>
+        <div class="form-group">
+        <div class="col-lg-offset-4">
+          <%= f.submit "Login", class: "btn btn-success" %>
+        </div>
+      </div>
+        <% end %>
+</div>
