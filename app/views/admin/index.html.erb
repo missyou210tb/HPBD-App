@@ -3,35 +3,38 @@
     <%= msg %>
   </div>
 <% end %>
-<table class="table">
+<table class="table table-striped">
   <thead>
     <tr>
-      <th scope="col"></th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-      <th scope="col"><%=link_to "+","/admin/new"%></i</th>
+      <th scope="col">Email</th>
+      <th scope="col">Name</th>
+      <th scope="col">Nickname</th>
+      <th scope="col">Birthday</th>
+      <th scope="col"><%=link_to "+","/admin/new"%></th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <td><i class="fa fa-pencil fa-lg" aria-hidden="true"></td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-    </tr>
+  <% @user.each do |user| %>
+  <tr>
+      <td>
+      <%= user.email%>
+      </td>
+      <td>
+      <%= user.name%>
+      </td>
+      <td>
+      <%= user.nickname%>
+      </td>
+      <td>
+      <%= user.birthday%>
+      </td>
+      <td>
+      <%=link_to "U","/admin/#{user.id}/edit"%>
+      <%=link_to "D",{ controller: "admin", action: "destroy", id: user.id }, 
+      data: { confirm: 'Are you sure?' }, 
+      method: :delete%>
+      </td>
+      </tr>
+      <% end %>
   </tbody>
 </table>

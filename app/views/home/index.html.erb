@@ -1,0 +1,23 @@
+<% if session[:current_user_id] %>  
+  <%= link_to "Log Out", logout_path %>  
+<% else %>  
+  <%= link_to "Sign Up",registers_path %> or  
+  <%= link_to "Log In", logins_path %>  
+<% end %>  
+</div>  
+<% flash.each do |type, msg| %>
+    <div class="alert alert-info">
+      <%= msg %>
+    </div>
+<%end%>
+<div id="calendar" class = "tab-panel active">
+</div>
+
+<script>
+$(document).ready(function() {
+  events = JSON.parse('<%= raw @event.to_json %>');
+  console.log(events);
+    $('#calendar').fullCalendar(
+    );
+  });
+</script>
