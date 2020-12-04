@@ -1,23 +1,55 @@
-<% if session[:current_user_id] %>  
-  <%= link_to "Log Out", logout_path %>  
-<% else %>  
-  <%= link_to "Sign Up",registers_path %> or  
-  <%= link_to "Log In", logins_path %>  
-<% end %>  
 </div>  
 <% flash.each do |type, msg| %>
     <div class="alert alert-info">
       <%= msg %>
     </div>
 <%end%>
+<div class="container" id="homeindex">
 <div id="calendar" class = "tab-panel active">
 </div>
-
+</div>
+<div class="modal" id="myModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <%= form_for @message, url: { controller: :home, action: :create},html: {class: "form-horizontal"} do |f| %>
+        <div>
+        <%= f.text_field :sendername, class: "form-control", placeholder: "Enter Your Name Example:Anonynmous" %>
+        </br>
+          <%= f.text_area :content,rows:5,class: "form-control", placeholder: "Enter birthday wishes",autofocus: true %>
+          <%= f.hidden_field :user_id, id: 'userId' %>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">
+        happy Birthday</button>
+        <% end %>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 <script>
 $(document).ready(function() {
-  events = JSON.parse('<%= raw @event.to_json %>');
-  console.log(events);
-    $('#calendar').fullCalendar(
-    );
+  $('#calendar').fullCalendar({
+    header: {
+      left: '',
+      center: 'title'},
+    events: <%= raw @event.to_json %>,
+    eventClick: function(event) {
+      messageHeader = "Send birthday wishes " + event.title + "";
+      $('.modal-title').html(messageHeader)
+      $('#userId').val(event.user_id)
+      $('#myModal').modal('show');
+       }
+  });
+  
   });
 </script>

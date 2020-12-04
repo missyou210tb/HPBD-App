@@ -1,0 +1,13 @@
+<% @message.each do |message| %>
+  <tr>
+    <td>
+    <%= message.user.name + "(" + message.user.nickname + ")" %>
+    </td>
+    <td>
+    <%= message.sendername%>
+    </td>
+    <td>
+    <%= message.content%>
+    </td>
+  </tr>
+<% end %>

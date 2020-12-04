@@ -1,0 +1,26 @@
+<% @users.each do |user| %>
+<tr>
+                  <td>
+                  <%= user.email%>
+                  </td>
+                  <td>
+                  <%= user.name%>
+                  </td>
+                  <td>
+                  <%= user.nickname%>
+                  </td>
+                  <td>
+                  <%= user.birthday%>
+                  </td>
+                  <td>
+                  <%=link_to "/admin/#{user.id}/edit" do%>
+                  <i class="fa fa-pencil fa-lg" aria-hidden="true"></i>
+                  <%end%>
+                  <%=link_to "/admin/#{user.id}", 
+                  data: { confirm: 'Are You Sure?' }, 
+                  method: :delete do %>
+                    <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
+                  <%end%>
+                  </td>
+</tr>
+<%end%>

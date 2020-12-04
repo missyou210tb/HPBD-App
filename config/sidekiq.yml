@@ -1,0 +1,9 @@
+:queues:
+  - hpbd_job
+
+:schedule:
+  HpbdJob:
+    cron: '58 6 * * *'
+    queue: hpbd_job
+
+    
