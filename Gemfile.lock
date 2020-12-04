@@ -140,11 +140,12 @@ GEM
     momentjs-rails (2.20.1)
       railties (>= 3.1)
     msgpack (1.3.3)
+    mysql2 (0.5.3)
     nio4r (2.5.4)
     nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
     public_suffix (4.0.6)
-    puma (4.3.6)
+    puma (4.3.7)
       nio4r (~> 2.0)
     raabro (1.4.0)
     rack (2.2.3)
@@ -243,7 +244,6 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    sqlite3 (1.4.2)
     thor (1.0.1)
     thread_safe (0.3.6)
     thwait (0.2.0)
@@ -286,6 +286,7 @@ DEPENDENCIES
   kaminari
   listen (~> 3.2)
   momentjs-rails
+  mysql2
   puma (~> 4.1)
   rails (~> 6.0.3, >= 6.0.3.4)
   ransack
@@ -298,7 +299,6 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   sprockets-rails
-  sqlite3 (~> 1.4)
   turbolinks (~> 5)
   tzinfo-data
   web-console (>= 3.3.0)
