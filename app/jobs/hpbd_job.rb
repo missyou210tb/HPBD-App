@@ -5,10 +5,10 @@ class HpbdJob < ApplicationJob
     user = User.where(birthday: Time.zone.now.to_date)
     if user.present? 
         user.each do |u|
-            puts "happy birthday #{u.name} (#{u.nickname}). Wishes you a very happy and successful birthday at work and in life."
+            puts I18n.t('wish',name: u.name,nickname: u.nickname)
             message=Message.where(user_id: u.id)
             if message.present?
-                puts "You are have some wishes sended from your friends:"
+                puts I18n.t 'statement'
                 message.each do |m|
                     puts "From #{m.sendername}:"
                     puts "#{m.content}"
@@ -16,7 +16,7 @@ class HpbdJob < ApplicationJob
             end
         end; nil
     else
-      puts "Today,noone have birthday,wishes everybody have nice working day."
+      puts I18n.t 'noone'
     end
   end
 

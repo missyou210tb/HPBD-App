@@ -30,4 +30,6 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  noone: "Today,noone have birthday,wishes everybody have nice working day... 1,2,3"
+  wish:  "happy birthday %{name} (%{nickname}).Wishes you a very happy and successful birthday at work and in life."
+  statement: "You are have some wishes sended from your friends:"
