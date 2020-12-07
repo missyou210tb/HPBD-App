@@ -1,15 +1,11 @@
 class AdminController < ApplicationController
     def index
-        if session[:current_admin_id]
         @users = User.all.page(params[:page]).per(20)
         @message = Message.all.page(params[:page]).per(5)
         respond_to do |format|
             format.html
             format.js
         end
-        else
-        @admin = Admin.new
-        end 
     end
     def new
         @user = User.new
@@ -34,19 +30,6 @@ class AdminController < ApplicationController
         end
 
     end
-    def clogins
-        admin = Admin.find_by(email: params[:admin][:email])
-        if admin && (admin.password == params[:admin][:password])
-            session[:current_admin_id] = admin.id
-            flash[:success] = "Login is successful"
-            redirect_to '/admin'
-        else
-            @admin = Admin.new
-                flash.now[:notice] = 'Email or password is false'
-                render "index"
-        end
-    end
-    
     def update
         @user = User.find_by(id: params[:id])
         if @user.update(permitted_params)
@@ -61,14 +44,6 @@ class AdminController < ApplicationController
         @user = User.find_by(id: params[:id])
         @user.destroy
         redirect_to "/admin"
-    end
-    def logout
-        if session[:current_admin_id]
-            session[:current_admin_id] = nil
-            redirect_to "/admin"
-        else
-        redirect_to "/admin"
-        end
     end
     private 
     def permitted_params

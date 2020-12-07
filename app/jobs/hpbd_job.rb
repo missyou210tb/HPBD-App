@@ -15,6 +15,8 @@ class HpbdJob < ApplicationJob
                 end
             end
         end; nil
+    else
+      puts "Today,noone have birthday,wishes everybody have nice working day."
     end
   end
 
