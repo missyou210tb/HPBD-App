@@ -1,9 +1,4 @@
 
- <% flash.each do |type, msg| %>
-    <div class="alert alert-info">
-      <%= msg %>
-    </div>
-  <%end%> 
 <div class = "container" id = "admin_login">
 <h2>Log in</h2>
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -28,4 +23,9 @@
       <%= f.submit "Log in", class: "btn btn-primary" %>
     </div>
   <% end %>
+   <% flash.each do |type, msg| %>
+    <div class="alert alert-info">
+      <%= msg %>
+    </div>
+  <%end%> 
 </div>

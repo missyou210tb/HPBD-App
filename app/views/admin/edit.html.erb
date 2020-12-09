@@ -5,47 +5,30 @@
   </div>
 <% end %>
 <div class="col-lg-offset-2">
-        <%= form_for @user, url: { controller: :admin, action: :update},html: {class: "form-horizontal"} do |f| %>
-          <div class="form-group">
-          <%= f.label :email, "Username", class: "col-md-2 control-label" %>
-          <div class="col-md-6">
-            <%= f.text_field :email, class: "form-control", placeholder: "Enter user name" %>
-          </div>
-        </div>
-        <div class="form-group">
-          <%= f.label :password, "Password", class: "col-md-2 control-label" %>
-          <div class="col-md-6">  
-            <%= f.text_field :password, class: "form-control", placeholder: "Enter password" %>
-          </div>
-        </div>
-        <div class="form-group">
-          <%= f.label :name, "Name", class: "col-md-2 control-label" %>
-          <div class="col-md-6">
-            <%= f.text_field :name, class: "form-control", placeholder: "Enter Name" %>
-          </div>
-        </div>
-        <div class="form-group">
-          <%= f.label :nickname, "Nickname", class: "col-md-2 control-label" %>
-          <div class="col-md-6">
-            <%= f.text_field :nickname, class: "form-control", placeholder: "Enter Nickname" %>
-          </div>
-        </div>
-        <div class="form-group">
-          <%= f.label :birthday, "Birthday", class: "col-md-2 control-label" %>
-          <div class="col-md-6">
-            <%= f.date_field :birthday, class: "form-control", placeholder: "Enter Birthday" %>
-          </div>
-        </div>
-        <div class= "form-group" id = "buttonpair"  >
-        <%=link_to "/admin" do%>
-          <input type="submit" name="commit" value="ComeBack" class="btn btn-success" data-disable-with="Login">
-        <%end%>
-          <%= f.submit "EditUser", class: "btn btn-success" %>
-        </div>
-        <% end %>
-</div>
-<% flash.each do |type, msg| %>
-  <div class="alert alert-info">
-    <%= msg %>
+  <%= form_for @user, url: { controller: :admin, action: :update},html: {class: "form-horizontal"} do |f| %>
+  <div class="form-group">
+    <%= f.label :name, "Name", class: "col-md-2 control-label" %>
+    <div class="col-md-6">
+      <%= f.text_field :name, class: "form-control", placeholder: "Enter Name" %>
+    </div>
   </div>
+  <div class="form-group">
+    <%= f.label :nickname, "Nickname", class: "col-md-2 control-label" %>
+    <div class="col-md-6">
+      <%= f.text_field :nickname, class: "form-control", placeholder: "Enter Nickname" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :birthday, "Birthday", class: "col-md-2 control-label" %>
+    <div class="col-md-6">
+      <%= f.date_field :birthday, class: "form-control", placeholder: "Enter Birthday" %>
+    </div>
+  </div>
+  <div class= "form-group" id = "buttonpair"  >
+  <%=link_to "/admin" do%>
+    <input type="submit" name="commit" value="ComeBack" class="btn btn-success" data-disable-with="Login">
   <%end%>
+    <%= f.submit "EditUser", class: "btn btn-success" %>
+  </div>
+  <% end %>
+</div>
