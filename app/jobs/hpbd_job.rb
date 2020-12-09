@@ -9,11 +9,16 @@ class HpbdJob < ApplicationJob
     client.auth_test
     users_data_all = User.all
     users_data = []
+    users_near_data = []
     users_client = client.users_list['members']
 
     users_data_all.each do |user_data_all|
-      if birthdaythisyear(user_data_all.birthday)  == Time.zone.now.to_date
+      if HandleJob.birthdaythisyear(user_data_all.birthday) == Time.zone.now.to_date
         users_data.push(user_data_all)
+      end
+      if ((HandleJob.birthdaythisyear(user_data_all.birthday) - Time.zone.now.to_date) <=7) \
+      && ((HandleJob.birthdaythisyear(user_data_all.birthday) - Time.zone.now.to_date) > 0)
+        users_near_data.push(user_data_all)
       end
     end
 
@@ -23,7 +28,7 @@ class HpbdJob < ApplicationJob
         
         users_client.each do |user_client|
           temp += 1
-          if get_nickname_from_display_name(user_client['profile']['display_name']) == user_data.nickname
+          if HandleJob.get_nickname_from_display_name(user_client['profile']['display_name']) == user_data.nickname
             string = ""
             text = ''
             text = text + '<@' + user_client['id'] + '|cal> '
@@ -63,27 +68,43 @@ class HpbdJob < ApplicationJob
         end
       end
     end
-  end
+    if users_near_data.first.present?
+      tag_names = []
 
-  def birthdaythisyear day_of_birth
-    day_month = day_of_birth.to_s.slice(4...day_of_birth.to_s.size)
-    birthday = Date.parse(Time.zone.now.year.to_s + day_month) 
-    birthday
-  end 
+      users_near_data.each do |user_data|
+        temp = 0
 
-  def get_nickname_from_display_name display_name
-    string_temp = display_name.split(" ")
-    string_temp = string_temp.join("")
-    if string_temp.index("(")
-      if string_temp.index(")")
-        a = string_temp.index("(") + 1
-        b = string_temp.index(")") - 1
-        return string_temp[a..b]
-      else
-        nil
+        users_client.each do |user_client|
+          temp = temp + 1
+          if HandleJob.get_nickname_from_display_name(user_client['profile']['display_name']) == user_data.nickname
+            text ='<@' + user_client['id'] + '|cal> '
+            tag_names.push(text)
+            break
+          end
+        end
+        if temp == users_client.size
+          text = user_data.name + ' (' + user_data.nickname + ')'
+          tag_names.push(text)
+        end
       end
-    else
-      nil
+
+      string = get_string_tag_name(tag_names)
+      message_send = I18n.t('upcoming',tagnames: string) + I18n.t('link')
+      client.chat_postMessage(channel: 'gmv-birthday-bot',text: message_send,as_user: true)
     end
+    
+  end
+  def get_string_tag_name tag_names
+    string = ''
+    temp1 = 0
+    tag_names.each do |tag_name|
+      temp1 = temp1 + 1
+      if temp1 == tag_names.size
+        string = string + tag_name
+      else
+        string = string + tag_name + ','
+      end 
+    end
+    return string
   end
 end
