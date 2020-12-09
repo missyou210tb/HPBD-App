@@ -92,7 +92,7 @@ class HpbdJob < ApplicationJob
       message_send = I18n.t('upcoming',tagnames: string) + I18n.t('link')
       client.chat_postMessage(channel: 'gmv-birthday-bot',text: message_send,as_user: true)
     end
-    
+
   end
   def get_string_tag_name tag_names
     string = ''

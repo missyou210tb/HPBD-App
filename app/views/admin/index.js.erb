@@ -4,4 +4,4 @@ $("#users").html("<%= j render('user') %>");
 $("#paginator").html("<%= j paginate(@users, remote: true,theme: 'twitter-bootstrap-3', param_name: :user_page) %>");
 
 $("#message").html("<%= j render('message') %>");
-$("#paginator1").html("<%= j paginate(@message, remote: true,theme: 'twitter-bootstrap-3', param_name: :message_page) %>");
+$("#paginator1").html("<%= j paginate(@messages, remote: true,theme: 'twitter-bootstrap-3', param_name: :message_page) %>");
