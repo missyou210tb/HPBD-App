@@ -68,31 +68,33 @@ class HpbdJob < ApplicationJob
         end
       end
     end
-    if users_near_data.first.present?
-      tag_names = []
+    if users_data.first.present?
+      if users_near_data.first.present?
+        tag_names = []
 
-      users_near_data.each do |user_data|
-        temp = 0
+        users_near_data.each do |user_data|
+          temp = 0
 
-        users_client.each do |user_client|
-          temp = temp + 1
-          if HandleJob.get_nickname_from_display_name(user_client['profile']['display_name']) == user_data.nickname
-            text ='<@' + user_client['id'] + '|cal> '
+          users_client.each do |user_client|
+            temp = temp + 1
+            if HandleJob.get_nickname_from_display_name(user_client['profile']['display_name']) == user_data.nickname
+              text ='<@' + user_client['id'] + '|cal> ' + ' - ' + (user_data.birthday).strftime('%d/%m/%Y').to_s
+              tag_names.push(text)
+              break
+            end
+          end
+          if temp == users_client.size
+            text = user_data.name + ' (' + user_data.nickname + ')' + ' - ' + (user_data.birthday).strftime('%d/%m/%Y').to_s
             tag_names.push(text)
-            break
           end
         end
-        if temp == users_client.size
-          text = user_data.name + ' (' + user_data.nickname + ')'
-          tag_names.push(text)
-        end
+
+        string = get_string_tag_name(tag_names)
+        message_send = I18n.t('upcoming',tagnames: string) + I18n.t('link')
+        client.chat_postMessage(channel: 'gmv-birthday-bot',text: message_send,as_user: true)
       end
 
-      string = get_string_tag_name(tag_names)
-      message_send = I18n.t('upcoming',tagnames: string) + I18n.t('link')
-      client.chat_postMessage(channel: 'gmv-birthday-bot',text: message_send,as_user: true)
     end
-
   end
   def get_string_tag_name tag_names
     string = ''
