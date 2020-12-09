@@ -12,7 +12,7 @@ class HpbdJob < ApplicationJob
     users_client = client.users_list['members']
 
     users_data_all.each do |user_data_all|
-      if birthdaythisyear(user_data_all.birthday)  == Time.zone.now.to_date
+      if birthdaythisyear(user_data_all.birthday) == Time.zone.now.to_date
         users_data.push(user_data_all)
       end
     end

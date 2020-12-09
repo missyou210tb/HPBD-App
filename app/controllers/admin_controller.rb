@@ -1,7 +1,7 @@
 class AdminController < ApplicationController
   def index
     @users = User.all.page(params[:user_page])
-    @message = Message.all.page(params[:message_page])
+    @messages = Message.all.page(params[:message_page])
     respond_to do |format|
       format.html
       format.js

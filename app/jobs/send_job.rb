@@ -7,7 +7,8 @@ class SendJob < ApplicationJob
     users_data_all = User.all
     users_data = []
     users_data_all.each do |user_data_all|
-      if ((birthdaythisyear(user_data_all.birthday) - Time.zone.now.to_date) <=7) &&  ((birthdaythisyear(user_data_all.birthday) - Time.zone.now.to_date) > 0)
+      if ((birthdaythisyear(user_data_all.birthday) - Time.zone.now.to_date) <=7) 
+      && ((birthdaythisyear(user_data_all.birthday) - Time.zone.now.to_date) > 0)
         users_data.push(user_data_all)
       end
     end
@@ -32,7 +33,7 @@ class SendJob < ApplicationJob
         end
       end
       string = get_string_tag_name(tag_names)
-      message_send = I18n.t('upcoming',tagnames: string) +  I18n.t('link')
+      message_send = I18n.t('upcoming',tagnames: string) + I18n.t('link')
       client.chat_postMessage(channel: 'gmv-birthday-bot',text: message_send,as_user: true)
     end
   end
@@ -45,14 +46,10 @@ class SendJob < ApplicationJob
   def get_nickname_from_display_name display_name
     string_temp = display_name.split(" ")
     string_temp = string_temp.join("")
-    if string_temp.index("(")
-      if string_temp.index(")")
-        a = string_temp.index("(") + 1
-        b = string_temp.index(")") - 1
-        return string_temp[a..b]
-      else
-        return nil
-      end
+    if string_temp.index("(") && string_temp.index(")")
+      a = string_temp.index("(") + 1
+      b = string_temp.index(")") - 1
+      return string_temp[a..b]
     else
       return nil
     end
