@@ -4,9 +4,9 @@
 
 :schedule:
   HpbdJob:
-    cron: '00 09 * * *'
+    cron: '05 10 * * *'
     queue: hpbd_job
   SendJob:
-    cron: '00 10 * * *'
+    cron: '06 10 * * *'
     queue: send_job
     
