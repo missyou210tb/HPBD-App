@@ -45,6 +45,8 @@ GEM
     activerecord (6.0.3.4)
       activemodel (= 6.0.3.4)
       activesupport (= 6.0.3.4)
+    activerecord-import (1.0.7)
+      activerecord (>= 3.2)
     activestorage (6.0.3.4)
       actionpack (= 6.0.3.4)
       activejob (= 6.0.3.4)
@@ -236,6 +238,9 @@ GEM
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
+    roo (2.8.3)
+      nokogiri (~> 1)
+      rubyzip (>= 1.3.0, < 3.0.0)
     ruby2_keywords (0.0.2)
     rubyzip (2.3.0)
     rufus-scheduler (3.6.0)
@@ -317,6 +322,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord-import
   async-websocket (~> 0.8.0)
   bootsnap (>= 1.4.2)
   bootstrap-kaminari-views
@@ -337,6 +343,7 @@ DEPENDENCIES
   rails (~> 6.0.3, >= 6.0.3.4)
   ransack
   redis-rails
+  roo (~> 2.8.0)
   sass-rails (>= 6)
   selenium-webdriver
   sidekiq

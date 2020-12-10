@@ -48,8 +48,12 @@ $(document).ready(function() {
       $('.modal-title').html(messageHeader)
       $('#userId').val(event.user_id)
       $('#myModal').modal('show');
-       }
+       },
+    eventRender: function(event, element) {
+     $(element).tooltip({title: event.title});
+ }
   });
+  
   
   });
 </script>

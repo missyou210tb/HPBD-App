@@ -22,6 +22,8 @@ gem 'puma', '~> 4.1'
 gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 #gem 'webpacker', '~> 4.0'
+gem 'activerecord-import'
+gem "roo", "~> 2.8.0"
 gem 'sprockets-rails', require: 'sprockets/railtie'
 gem 'jquery-rails'
 gem 'bootstrap-sass'
