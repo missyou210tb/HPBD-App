@@ -38,7 +38,7 @@ class HpbdJob < ApplicationJob
               string = string + I18n.t('statement') + "\n"
               
               messages.each do |message|
-                string = string + 'From ' + message.sendername + ':' + "\n"
+                string = string + '*From ' + message.sendername + ':*' + "\n"
                 string = string  + message.content + "\n"
               end 
             
@@ -59,7 +59,7 @@ class HpbdJob < ApplicationJob
             string = string + I18n.t('statement') + "\n"
 
             messages.each do |message|
-              string = string + 'From ' + message.sendername + ':' + "\n"
+              string = string + '*From ' + message.sendername + ':*' + "\n"
               string = string  + message.content + "\n"
             end
 
@@ -78,13 +78,13 @@ class HpbdJob < ApplicationJob
           users_client.each do |user_client|
             temp = temp + 1
             if HandleJob.get_nickname_from_display_name(user_client['profile']['display_name']) == user_data.nickname
-              text ='<@' + user_client['id'] + '|cal> ' + ' - ' + (user_data.birthday).strftime('%d/%m/%Y').to_s
+              text ='<@' + user_client['id'] + '|cal> ' + ' - ' + '(' +(user_data.birthday).strftime('%d/%m/%Y').to_s + ')'
               tag_names.push(text)
               break
             end
           end
           if temp == users_client.size
-            text = user_data.name + ' (' + user_data.nickname + ')' + ' - ' + (user_data.birthday).strftime('%d/%m/%Y').to_s
+            text = user_data.name + ' (' + user_data.nickname + ')' + ' - ' + '(' + (user_data.birthday).strftime('%d/%m/%Y').to_s + ')'
             tag_names.push(text)
           end
         end
@@ -104,7 +104,7 @@ class HpbdJob < ApplicationJob
       if temp1 == tag_names.size
         string = string + tag_name
       else
-        string = string + tag_name + ','
+        string = string + tag_name + ', '
       end 
     end
     return string

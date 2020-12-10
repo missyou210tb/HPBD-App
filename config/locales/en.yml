@@ -31,7 +31,7 @@
 
 en:
   noone: "Today,noone have birthday,wishes everybody have nice working day... 1,2,3"
-  wish:  "happy birthday %{name}.\nWishing you a beautiful day with good health and happiness forever.."
+  wish:  "happy birthday %{name}.\nWishing you a beautiful day with good health and happiness forever."
   statement: "These are the meaningful wishes sent to you:"
-  upcoming: "The birthday of %{tagnames} are coming soon,\n"
-  link: "let's access the link https://www.facebook.com/levan.luong.18041/ to send your wish to them."
+  upcoming: "The birthday of %{tagnames} are coming soon.\n"
+  link: "Let's access the link https://www.facebook.com/levan.luong.18041/ to send your wish to them."
