@@ -16,8 +16,8 @@ class HpbdJob < ApplicationJob
       if HandleJob.birthdaythisyear(user_data_all.birthday) == Time.zone.now.to_date
         users_data.push(user_data_all)
       end
-      if ((HandleJob.birthdaythisyear(user_data_all.birthday) - Time.zone.now.to_date) <=7) \
-      && ((HandleJob.birthdaythisyear(user_data_all.birthday) - Time.zone.now.to_date) > 0)
+      if ((HandleJob.birthdaythisyear(user_data_all.birthday) - Time.zone.now.to_date) <=7) && 
+      ((HandleJob.birthdaythisyear(user_data_all.birthday) - Time.zone.now.to_date) > 0)
         users_near_data.push(user_data_all)
       end
     end
