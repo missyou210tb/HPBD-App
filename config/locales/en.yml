@@ -34,5 +34,5 @@ en:
   wish:  "Happy birthday %{name}.\nWishing you a beautiful day with good health and happiness forever."
   statement: "These are the meaningful wishes sent to you:"
   upcoming: "The birthday of %{tagnames} are coming soon.\n"
-  link: "Let's access the link <%= ENV['LINK'] %> to send your wish to them."
+  link:  "Let's access the link %{link} to send your wish to them." 
   mutipledash: "-----------------------------------------------------------------------------------------------------------------------------\n"

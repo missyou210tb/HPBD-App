@@ -3,6 +3,6 @@
 
 :schedule:
   HpbdJob:
-    cron: '00 09 * * *'
+    cron: '09 15 * * *'
     queue: hpbd_job
     
