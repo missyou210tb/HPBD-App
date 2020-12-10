@@ -13,11 +13,11 @@ class HpbdJob < ApplicationJob
     users_client = client.users_list['members']
 
     users_data_all.each do |user_data_all|
-      if HandleJob.birthdaythisyear(user_data_all.birthday) == Time.zone.now.to_date
+      if Job::HandleJob.birthdaythisyear(user_data_all.birthday) == Time.zone.now.to_date
         users_data.push(user_data_all)
       end
-      if ((HandleJob.birthdaythisyear(user_data_all.birthday) - Time.zone.now.to_date) <=7) && 
-      ((HandleJob.birthdaythisyear(user_data_all.birthday) - Time.zone.now.to_date) > 0)
+      if ((Job::HandleJob.birthdaythisyear(user_data_all.birthday) - Time.zone.now.to_date) <=7) && 
+      ((Job::HandleJob.birthdaythisyear(user_data_all.birthday) - Time.zone.now.to_date) > 0)
         users_near_data.push(user_data_all)
       end
     end
@@ -28,7 +28,7 @@ class HpbdJob < ApplicationJob
         
         users_client.each do |user_client|
           temp += 1
-          if HandleJob.get_nickname_from_display_name(user_client['profile']['display_name']) == user_data.nickname
+          if Job::HandleJob.get_nickname_from_display_name(user_client['profile']['display_name']) == user_data.nickname
             string = ""
             text = ''
             text = text + '<@' + user_client['id'] + '|cal> '
@@ -77,14 +77,14 @@ class HpbdJob < ApplicationJob
 
           users_client.each do |user_client|
             temp = temp + 1
-            if HandleJob.get_nickname_from_display_name(user_client['profile']['display_name']) == user_data.nickname
-              text ='<@' + user_client['id'] + '|cal> ' + ' - ' + '(' +(user_data.birthday).strftime('%d/%m/%Y').to_s + ')'
+            if Job::HandleJob.get_nickname_from_display_name(user_client['profile']['display_name']) == user_data.nickname
+              text ='<@' + user_client['id'] + '|cal> ' + ' - ' + '(' +(user_data.birthday).strftime(DMY).to_s + ')'
               tag_names.push(text)
               break
             end
           end
           if temp == users_client.size
-            text = user_data.name + ' (' + user_data.nickname + ')' + ' - ' + '(' + (user_data.birthday).strftime('%d/%m/%Y').to_s + ')'
+            text = user_data.name + ' (' + user_data.nickname + ')' + ' - ' + '(' + (user_data.birthday).strftime(DMY).to_s + ')'
             tag_names.push(text)
           end
         end
@@ -102,11 +102,7 @@ class HpbdJob < ApplicationJob
     temp1 = 0
     tag_names.each do |tag_name|
       temp1 = temp1 + 1
-      if temp1 == tag_names.size
-        string = string + tag_name
-      else
-        string = string + tag_name + ', '
-      end 
+      string += temp1 == tag_names.size ? string + tag_name : string + tag_name + ', '
     end
     return string
   end
