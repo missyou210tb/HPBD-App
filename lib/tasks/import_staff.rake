@@ -14,7 +14,5 @@ namespace :import_staff do
     users.each do |user|
       User.create(user)
     end
-
   end
-
 end

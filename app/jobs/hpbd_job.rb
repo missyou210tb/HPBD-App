@@ -77,7 +77,7 @@ class HpbdJob < ApplicationJob
 
           users_client.each do |user_client|
             temp = temp + 1
-            if Job::HandleJob.get_nickname_from_display_name(user_client['profile']['display_name']) == user_data.nickname
+            if Job::HandleJob.get_nickname_from_display_name(user_client['profile']['display_name']).downcase == user_data.nickname.downcase
               text ='<@' + user_client['id'] + '|cal> ' + '- ' + '(' +(user_data.birthday).strftime(DMY).to_s + ')'
               tag_names.push(text)
               break
