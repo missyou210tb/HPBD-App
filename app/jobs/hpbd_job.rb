@@ -101,8 +101,8 @@ class HpbdJob < ApplicationJob
     string = ''
     temp1 = 0
     tag_names.each do |tag_name|
-      temp1 = temp1 + 1
-      string += temp1 == tag_names.size ? string + tag_name : string + tag_name + ', '
+      temp1 += 1
+      string += (temp1 == tag_names.size) ? (string + tag_name) : (string + tag_name + ', ')
     end
     return string
   end
