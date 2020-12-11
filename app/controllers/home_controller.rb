@@ -4,12 +4,15 @@ class HomeController < ApplicationController
     @event = []
     @message = Message.new
     @user.each do |user|
-        @event.push({
+        @event.push
+        (
+          {
             user_id: user.id,
             title: user[:name] + " (" + user[:nickname] + ")",
             start: birthdaythisyear(user[:birthday]),
             end: birthdaythisyear(user[:birthday] + 1.day)
-        })
+          }
+        )
     end
   end
 
