@@ -3,6 +3,7 @@
     <%= msg %>
   </div>
 <% end %>
+
 <div class="col-lg-offset-2">
   <%= form_for @user, url: { controller: :admin, action: :update},html: {class: "form-horizontal"} do |f| %>
     <div class="form-group">
