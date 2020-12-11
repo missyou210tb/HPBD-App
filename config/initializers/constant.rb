@@ -1,1 +1,1 @@
- DMY = '%d/%m/%Y'.freeze
+ DM = '%d/%m'.freeze

@@ -16,19 +16,19 @@ class HpbdJob < ApplicationJob
       if Job::HandleJob.birthdaythisyear(user_data_all.birthday) == Time.zone.now.to_date
         users_data.push(user_data_all)
       end
-      if ((Job::HandleJob.birthdaythisyear(user_data_all.birthday) - Time.zone.now.to_date) <=7) && 
+      if ((Job::HandleJob.birthdaythisyear(user_data_all.birthday) - Time.zone.now.to_date) <=10) && 
       ((Job::HandleJob.birthdaythisyear(user_data_all.birthday) - Time.zone.now.to_date) > 0)
         users_near_data.push(user_data_all)
       end
     end
-
     if users_data.first.present?
       users_data.each do |user_data|
         temp = 0
         
         users_client.each do |user_client|
           temp += 1
-          if Job::HandleJob.get_nickname_from_display_name(user_client['profile']['display_name']) == user_data.nickname
+          if Job::HandleJob.get_nickname_from_display_name(user_client['profile']['display_name']) &&
+            (Job::HandleJob.get_nickname_from_display_name(user_client['profile']['display_name']) == user_data.nickname)
             string = ""
             text = ''
             text = text + '<@' + user_client['id'] + '|cal> '
@@ -41,9 +41,9 @@ class HpbdJob < ApplicationJob
                 string = string + '*From ' + message.sendername + ':*' + "\n"
                 string = string  + message.content + "\n"
               end 
-            
             end
-            client.chat_postMessage(channel: 'gmv-birthday-bot',text: string,as_user: true)
+            p string
+            # client.chat_postMessage(channel: 'gmv-birthday-bot',text: string,as_user: true)
             break
           end
         
@@ -62,7 +62,6 @@ class HpbdJob < ApplicationJob
               string = string + '*From ' + message.sendername + ':*' + "\n"
               string = string  + message.content + "\n"
             end
-
           end
           client.chat_postMessage(channel: 'gmv-birthday-bot',text: string,as_user: true)
         end
@@ -77,8 +76,9 @@ class HpbdJob < ApplicationJob
 
           users_client.each do |user_client|
             temp = temp + 1
-            if Job::HandleJob.get_nickname_from_display_name(user_client['profile']['display_name']).downcase == user_data.nickname.downcase
-              text ='<@' + user_client['id'] + '|cal> ' + '- ' + '(' +(user_data.birthday).strftime(DMY).to_s + ')'
+            if Job::HandleJob.get_nickname_from_display_name(user_client['profile']['display_name']) &&
+              (Job::HandleJob.get_nickname_from_display_name(user_client['profile']['display_name']).downcase == user_data.nickname.downcase)
+              text ='<@' + user_client['id'] + '|cal> ' + '- ' + '(' +(user_data.birthday).strftime(DM).to_s + ')'
               tag_names.push(text)
               break
             end
@@ -93,7 +93,6 @@ class HpbdJob < ApplicationJob
         message_send = I18n.t('mutipledash')
         message_send = message_send + I18n.t('upcoming',tagnames: string) + I18n.t('link',link: ENV['LINK'])
         client.chat_postMessage(channel: 'gmv-birthday-bot',text: message_send,as_user: true)
-        p message_send
       end
 
     end
@@ -103,7 +102,7 @@ class HpbdJob < ApplicationJob
     temp1 = 0
     tag_names.each do |tag_name|
       temp1 += 1
-      string += (temp1 == tag_names.size) ? (string + tag_name) : (string + tag_name + ', ')
+      string += (temp1 == tag_names.size) ? (tag_name) : (tag_name + ', ')
     end
     return string
   end
