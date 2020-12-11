@@ -1,23 +1,23 @@
 <% @users.each do |user| %>
   <tr>
     <td>
-    <%= user.name%>
+    <%= user.name %>
     </td>
     <td>
-    <%= user.nickname%>
+    <%= user.nickname %>
     </td>
     <td>
-    <%= user.birthday%>
+    <%= user.birthday %>
     </td>
     <td>
-    <%=link_to "/admin/#{user.id}/edit" do%>
+    <%= link_to "/admin/#{user.id}/edit" %>
       <i class="fa fa-pencil fa-lg" aria-hidden="true"></i>
-    <%end%>
-    <%=link_to "/admin/#{user.id}", 
+    <% end %>
+    <%= link_to "/admin/#{user.id}", 
       data: { confirm: 'Are You Sure?' }, 
       method: :delete do %>
         <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
-      <%end%>
+      <% end %>
     </td>
   </tr>
-<%end%>
+<% end %>

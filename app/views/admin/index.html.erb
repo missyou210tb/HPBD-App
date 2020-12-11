@@ -1,15 +1,17 @@
 <div id = "admin_index">
-  <% if admin_signed_in?%>
+  <% if admin_signed_in? %>
     <%= link_to "Sign out", destroy_admin_session_path, :method => :delete,class: "btn btn-primary" %>
-  <%else%>
-    <%= link_to "Login", "/admin/login",class: "btn btn-primary"  %>
-  <%end%>
+  <% else %>
+    <%= link_to "Login", "/admin/login",class: "btn btn-primary" %>
+  <% end %>
+
   <% flash.each do |type, msg| %>
       <div class="alert alert-info">
         <%= msg %>
       </div>
-  <%end%> 
-  <% if admin_signed_in?%>
+  <% end %> 
+
+  <% if admin_signed_in? %>
     <div class="row">
       <div class="col-md-12">
         <div class="nav-tabs-custom">
@@ -26,9 +28,9 @@
                     <th scope="col">Nickname</th>
                     <th scope="col">Birthday</th>
                     <th scope="col">
-                      <%= link_to "/admin/create_user" do%>
+                      <%= link_to "/admin/create_user" do %>
                         <i class="fa fa-plus fa-lg" aria-hidden="true"></i>
-                      <%end%> 
+                      <% end %> 
                     </th>
                   </tr>
                 </thead>
@@ -37,7 +39,7 @@
                 </tbody>
               </table>
                 <div id="paginator">
-                <%= paginate @users, remote: true,theme: 'twitter-bootstrap-3', param_name: :user_page %>
+               Ư <%= paginate @users, remote: true,theme: 'twitter-bootstrap-3', param_name: :user_page %>
                 </div>
             </div>
             <div class="tab-pane" id="user-investments">
@@ -61,5 +63,5 @@
         </div>
       </div>
     </div>
-  <%end%>
+  <% end %>
 </div>
