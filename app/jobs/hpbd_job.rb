@@ -42,8 +42,7 @@ class HpbdJob < ApplicationJob
                 string = string  + message.content + "\n"
               end 
             end
-            p string
-            # client.chat_postMessage(channel: 'gmv-birthday-bot',text: string,as_user: true)
+            client.chat_postMessage(channel: 'gmv-birthday-bot',text: string,as_user: true)
             break
           end
         
@@ -78,13 +77,13 @@ class HpbdJob < ApplicationJob
             temp = temp + 1
             if Job::HandleJob.get_nickname_from_display_name(user_client['profile']['display_name']) &&
               (Job::HandleJob.get_nickname_from_display_name(user_client['profile']['display_name']).downcase == user_data.nickname.downcase)
-              text ='<@' + user_client['id'] + '|cal> ' + '- ' + '(' +(user_data.birthday).strftime(DM).to_s + ')'
+              text ='<@' + user_client['id'] + '|cal> ' + '- ' + '(' +(user_data.birthday).strftime(DM_FORMAT).to_s + ')'
               tag_names.push(text)
               break
             end
           end
           if temp == users_client.size
-            text = user_data.name + ' (' + user_data.nickname + ')' + ' - ' + '(' + (user_data.birthday).strftime(DMY).to_s + ')'
+            text = user_data.name + ' (' + user_data.nickname + ')' + ' - ' + '(' + (user_data.birthday).strftime(DM_FORMAT).to_s + ')'
             tag_names.push(text)
           end
         end
@@ -94,7 +93,6 @@ class HpbdJob < ApplicationJob
         message_send = message_send + I18n.t('upcoming',tagnames: string) + I18n.t('link',link: ENV['LINK'])
         client.chat_postMessage(channel: 'gmv-birthday-bot',text: message_send,as_user: true)
       end
-
     end
   end
   def get_string_tag_name tag_names

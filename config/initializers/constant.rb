@@ -1,1 +1,1 @@
- DM = '%d/%m'.freeze
+ DM_FORMAT = '%d/%m'.freeze
