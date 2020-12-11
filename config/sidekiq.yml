@@ -1,12 +1,8 @@
 :queues:
   - hpbd_job
-  - send_job
 
 :schedule:
   HpbdJob:
-    cron: '00 09 * * *'
+    cron: '40 08 * * *'
     queue: hpbd_job
-  SendJob:
-    cron: '00 10 * * *'
-    queue: send_job
     
