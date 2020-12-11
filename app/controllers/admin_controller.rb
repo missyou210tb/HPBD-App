@@ -1,5 +1,6 @@
 class AdminController < ApplicationController
   def index
+    @tab = params[:tab]
     @users = User.all.page(params[:user_page])
     @messages = Message.all.page(params[:message_page])
     respond_to do |format|
@@ -46,11 +47,11 @@ class AdminController < ApplicationController
     end
     @user = User.find_by(id: params[:id])
     if @user.update(permitted_params)
-        flash[:success] = "Update success"
-        redirect_to "/admin"
+      flash[:success] = "Update success"
+      redirect_to "/admin"
     else
-        flash.now[:errors] = "Update fail"
-        render :edit
+      flash.now[:errors] = "Update fail"
+      render :edit
     end
   end
 
@@ -60,8 +61,14 @@ class AdminController < ApplicationController
     redirect_to "/admin"
   end
 
+  def destroy_messages
+    @message = Message.find_by(id: params[:id])
+    @message.destroy
+    redirect_to "/admin?tab=user-investments"
+  end 
+
   private 
   def permitted_params
-      params.require(:user).permit(:name,:nickname,:birthday)
+    params.require(:user).permit(:name,:nickname,:birthday)
   end
 end

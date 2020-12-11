@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :admin do
     get 'create_user', on: :collection
     post 'post_user', on: :collection
+    delete 'destroy_message/:id', on: :collection, action: 'destroy_messages' 
   end
   resources :home
   root to: "home#index"

@@ -9,5 +9,15 @@
     <td>
       <%= message.content %>
     </td>
+    <td>
+      <%= message.createdate.strftime(DMY_FORMAT) %>
+    </td>
+    <td>
+    <%= link_to "/admin/destroy_message/#{ message.id }", 
+      data: { confirm: 'Are You Sure?' }, 
+      method: :delete do %>
+        <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
+      <% end %>
+    </td>
   </tr>
 <% end %>
