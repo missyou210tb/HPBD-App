@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 2020_12_04_092957) do
     t.string "content"
     t.integer "user_id"
     t.string "sendername"
+    t.date "createdate"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

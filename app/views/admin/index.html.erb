@@ -16,11 +16,11 @@
       <div class="col-md-12">
         <div class="nav-tabs-custom">
           <ul class="nav nav-tabs">
-            <li class="active"><a href="#user-detail" data-toggle="tab">SeeUser</a></li>
-            <li><a href="#user-investments" data-toggle="tab">SeeWishes</a></li>
+            <li class="active"><a href="#user-detail" data-toggle="tab" role='tab'>SeeUser</a></li>
+            <li><a href="#user-investments" data-toggle="tab" role='tab'>SeeWishes</a></li>
           </ul>
           <div class="tab-content">
-            <div class="tab-pane active" id="user-detail">
+            <div class="tab-pane active" id="user-detail" role='tabpanel'>
               <table class="table table-striped table-bordered" id="tableUser">
                 <thead>
                   <tr>
@@ -42,13 +42,14 @@
                Ư <%= paginate @users, remote: true,theme: 'twitter-bootstrap-3', param_name: :user_page %>
                 </div>
             </div>
-            <div class="tab-pane" id="user-investments">
+            <div class="tab-pane" id="user-investments" role='tabpanel' >
                 <table class="table table-striped table-bordered">
                   <thead>
                     <tr>
                       <th scope="col">ReceivedUser</th>
                       <th scope="col">Sender</th>
                       <th scope="col">ConTent</th>
+                      <th scope="col">CreateDate</th>
                     </tr>
                   </thead>
                   <tbody id='message'>
@@ -65,3 +66,26 @@
     </div>
   <% end %>
 </div>
+
+<script>
+  <% if @tab.present? %>
+    var tab = "<%= @tab %>";
+    var linkTabs = $('.nav-tabs li');
+    var contentTabs = $('.tab-pane');
+    linkTabs.removeClass('active');
+    contentTabs.removeClass('active');
+
+    linkTabs.each(function(index, link) {
+      // '#' + tab = #user-detail
+      if ($(link).find('a').attr('href') === ('#' + tab)) {
+        $(link).addClass('active');
+      }
+    });
+
+    contentTabs.each(function(index, content) {
+      if ($(content).attr('id') === tab) {
+        $(content).addClass('active');
+      }
+    });
+  <% end %>
+</script>

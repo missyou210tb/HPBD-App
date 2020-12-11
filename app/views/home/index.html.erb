@@ -24,6 +24,7 @@
           </br>
             <%= f.text_area :content,rows:5,class: "form-control", placeholder: "Enter birthday wishes",autofocus: true %>
             <%= f.hidden_field :user_id, id: 'userId' %>
+            <%= f.hidden_field :createdate, value: Time.zone.now.to_date %>
           </div>
       </div>
       <div class="modal-footer">

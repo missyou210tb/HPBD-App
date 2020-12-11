@@ -20,12 +20,13 @@ class HomeController < ApplicationController
     message.user_id = params[:message][:user_id]
     message.content = params[:message][:content]
     message.sendername = params[:message][:sendername]
+    message.createdate = params[:message][:createdate]
     user = User.find_by(id: params[:message][:user_id])
     name = user.name + " (" + user.nickname + ")"
     if message.save
-        flash[:success] = "Thank you for sending your best wishes to #{name}"
+      flash[:success] = "Thank you for sending your best wishes to #{name}"
     else
-        flash[:error] = "Sent wishes fail"
+      flash[:error] = "Sent wishes fail"
     end
     redirect_to root_url
   end
